@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Raylib Docs</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Topbar -->
+    <header class="topbar">
+        <div class="logo">
+            <a href="index.html">⬅ Voltar</a>
+            <span id="current-lang-badge">Raylib</span>
+        </div>
+        <div class="search-container">
+            <input type="text" id="search-input" placeholder="Buscar funções (Ctrl+K)...">
+        </div>
+        <div class="controls">
+            <button id="theme-toggle">☀️</button>
+        </div>
+    </header>
+
+    <div class="layout">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <nav id="nav-modules">
+                <h3>Módulos</h3>
+                <ul>
+                    <li data-module="all" class="active">Todos</li>
+                    <li data-module="rcore">rcore (Core)</li>
+                    <li data-module="rshapes">rshapes (Formas)</li>
+                    <li data-module="rtextures">rtextures (Texturas)</li>
+                    <li data-module="rtext">rtext (Texto)</li>
+                    <li data-module="rmodels">rmodels (Modelos 3D)</li>
+                    <li data-module="raudio">raudio (Áudio)</li>
+                </ul>
+                
+                <h3>Outros</h3>
+                <ul>
+                    <li data-view="structs">Structs</li>
+                    <li data-view="colors">Cores</li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="content">
+            <div id="welcome-msg" class="welcome-msg">
+                <h2>Documentação Raylib PT-BR</h2>
+                <p>Selecione um módulo na barra lateral ou use a busca para encontrar funções específicas.</p>
+                
+                <div class="getting-started" id="getting-started-node" style="display: none;">
+                    <h3>Começando com node-raylib</h3>
+                    <pre><code>npm install raylib</code></pre>
+                    <pre><code>const r = require('raylib');
+
+r.InitWindow(800, 450, "Olá Mundo");
+r.SetTargetFPS(60);
+
+while (!r.WindowShouldClose()) {
+    r.BeginDrawing();
+    r.ClearBackground(r.RAYWHITE);
+    r.DrawText("node-raylib funciona!", 190, 200, 20, r.LIGHTGRAY);
+    r.EndDrawing();
+}
+
+r.CloseWindow();</code></pre>
+                </div>
+            </div>
+
+            <div id="results-container">
+                <!-- Functions will be rendered here -->
+            </div>
+        </main>
+
+        <!-- Right Panel (Details) -->
+        <aside class="details-panel" id="details-panel">
+            <div class="details-content">
+                <button id="close-details">×</button>
+                <div id="details-body">
+                    <p class="placeholder">Selecione uma função para ver os detalhes.</p>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <script src="data.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

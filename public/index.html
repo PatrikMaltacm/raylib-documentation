@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Raylib & Node-Raylib Docs | Selecione a Linguagem</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 100%);
+            margin: 0;
+            overflow: hidden;
+        }
+
+        .landing-container {
+            text-align: center;
+            z-index: 10;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            background: -webkit-linear-gradient(45deg, #00d4ff, #FFD700);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        p.subtitle {
+            color: #a0a0b0;
+            font-size: 1.2rem;
+            margin-bottom: 50px;
+        }
+
+        .cards {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 40px;
+            width: 250px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            text-decoration: none;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.2);
+        }
+
+        .card-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+        }
+
+        .card h2 {
+            font-size: 1.5rem;
+            margin: 0 0 10px 0;
+        }
+
+        .card p {
+            color: #a0a0b0;
+            font-size: 0.9rem;
+            margin: 0;
+        }
+        
+        .blob {
+            position: absolute;
+            filter: blur(80px);
+            z-index: 1;
+            opacity: 0.5;
+        }
+        .blob-1 {
+            top: -100px;
+            left: -100px;
+            width: 400px;
+            height: 400px;
+            background: rgba(0, 212, 255, 0.3);
+            border-radius: 50%;
+        }
+        .blob-2 {
+            bottom: -100px;
+            right: -100px;
+            width: 400px;
+            height: 400px;
+            background: rgba(255, 215, 0, 0.2);
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body>
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+
+    <div class="landing-container">
+        <h1>Raylib Docs PT-BR</h1>
+        <p class="subtitle">Selecione a linguagem de programação para a documentação</p>
+
+        <div class="cards">
+            <a href="docs.html?lang=c" class="card">
+                <div class="card-icon">🅒</div>
+                <h2>C / C++</h2>
+                <p>A documentação oficial original da Raylib.</p>
+            </a>
+            
+            <a href="docs.html?lang=node" class="card">
+                <div class="card-icon">🟢</div>
+                <h2>Node.js</h2>
+                <p>Bindings para JavaScript via node-raylib.</p>
+            </a>
+        </div>
+    </div>
+</body>
+</html>
