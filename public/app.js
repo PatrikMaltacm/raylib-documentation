@@ -17,6 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentModule = 'all';
     let currentView = 'functions';
     let searchQuery = '';
+    let uiLang = 'pt';
 
     // DOM Elements
     const searchInput = document.getElementById('search-input');
@@ -37,6 +38,21 @@ document.addEventListener('DOMContentLoaded', () => {
             root.setAttribute('data-theme', 'light');
             themeToggle.textContent = '🌙';
         }
+    });
+
+    // Language Toggle
+    const uiLangToggle = document.getElementById('ui-lang-toggle');
+    uiLangToggle.addEventListener('click', () => {
+        if (uiLang === 'pt') {
+            uiLang = 'en';
+            uiLangToggle.textContent = '🇧🇷 PT';
+            searchInput.placeholder = 'Search functions (Ctrl+K)...';
+        } else {
+            uiLang = 'pt';
+            uiLangToggle.textContent = '🇺🇸 EN';
+            searchInput.placeholder = 'Buscar funções (Ctrl+K)...';
+        }
+        renderContent();
     });
 
     // Keyboard shortcut for search
@@ -99,12 +115,12 @@ document.addEventListener('DOMContentLoaded', () => {
         if (searchQuery) {
             filtered = filtered.filter(f => 
                 f.name.toLowerCase().includes(searchQuery) || 
-                f.desc_pt.toLowerCase().includes(searchQuery)
+                (uiLang === 'pt' ? f.desc_pt : f.desc).toLowerCase().includes(searchQuery)
             );
         }
 
         if (filtered.length === 0) {
-            resultsContainer.innerHTML = '<p class="text-muted">Nenhum resultado encontrado.</p>';
+            resultsContainer.innerHTML = `<p class="text-muted">${uiLang === 'pt' ? 'Nenhum resultado encontrado.' : 'No results found.'}</p>`;
             return;
         }
 
@@ -124,10 +140,11 @@ document.addEventListener('DOMContentLoaded', () => {
             
             funcs.forEach(f => {
                 const sig = currentLang === 'node' ? f.node_sig : f.c_sig;
+                const description = uiLang === 'pt' ? f.desc_pt : f.desc;
                 html += `
                     <div class="func-card" onclick="showFunctionDetails('${f.name}')">
                         <div class="func-name">${highlightText(f.name, searchQuery)}</div>
-                        <div class="func-desc">${highlightText(f.desc_pt, searchQuery)}</div>
+                        <div class="func-desc">${highlightText(description, searchQuery)}</div>
                         <div style="font-size:0.8rem; margin-top:5px; color:var(--text-muted)">
                             <code>${sig}</code>
                         </div>
@@ -150,12 +167,13 @@ document.addEventListener('DOMContentLoaded', () => {
             filtered = filtered.filter(s => s.name.toLowerCase().includes(searchQuery));
         }
 
-        let html = '<h2>Estruturas de Dados (Structs)</h2><div class="func-group"><div>';
+        let html = `<h2>${uiLang === 'pt' ? 'Estruturas de Dados (Structs)' : 'Data Structures (Structs)'}</h2><div class="func-group"><div>`;
         filtered.forEach(s => {
+            const description = uiLang === 'pt' ? s.desc_pt : s.desc;
             html += `
                 <div class="func-card">
                     <div class="func-name">${highlightText(s.name, searchQuery)}</div>
-                    <div class="func-desc">${highlightText(s.desc_pt, searchQuery)}</div>
+                    <div class="func-desc">${highlightText(description, searchQuery)}</div>
                 </div>
             `;
         });
@@ -202,18 +220,22 @@ document.addEventListener('DOMContentLoaded', () => {
         const func = raylibData.functions.find(f => f.name === funcName);
         if (!func) return;
 
+        const mainDesc = uiLang === 'pt' ? func.desc_pt : func.desc;
+        const altDesc = uiLang === 'pt' ? func.desc : func.desc_pt;
+        const altLabel = uiLang === 'pt' ? 'Original: ' : 'PT-BR: ';
+
         let html = `
             <h2>${func.name}</h2>
-            <p style="color: var(--accent);">${func.desc_pt}</p>
-            <p class="text-muted" style="font-size: 0.9em; font-style: italic;">Original: ${func.desc}</p>
+            <p style="color: var(--accent);">${mainDesc}</p>
+            <p class="text-muted" style="font-size: 0.9em; font-style: italic;">${altLabel}${altDesc}</p>
             
             <div style="margin-top:20px;">
-                <strong>Assinatura (${currentLang === 'node' ? 'Node.js' : 'C'}):</strong>
+                <strong>${uiLang === 'pt' ? 'Assinatura' : 'Signature'} (${currentLang === 'node' ? 'Node.js' : 'C'}):</strong>
                 <div class="detail-sig">${currentLang === 'node' ? func.node_sig : func.c_sig}</div>
             </div>
             
             <div style="margin-top:20px;">
-                <strong>Outra linguagem (${currentLang === 'node' ? 'C' : 'Node.js'}):</strong>
+                <strong>${uiLang === 'pt' ? 'Outra linguagem' : 'Other language'} (${currentLang === 'node' ? 'C' : 'Node.js'}):</strong>
                 <div class="detail-sig" style="opacity: 0.7; border-left-color: var(--text-muted);">${currentLang === 'node' ? func.c_sig : func.node_sig}</div>
             </div>
         `;
@@ -221,7 +243,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (func.examples) {
             html += `
                 <div class="detail-example">
-                    <strong>Exemplo de Código:</strong>
+                    <strong>${uiLang === 'pt' ? 'Exemplo de Código' : 'Code Example'}:</strong>
                     <pre><code>${currentLang === 'node' ? func.examples.node : func.examples.c}</code></pre>
                 </div>
             `;
