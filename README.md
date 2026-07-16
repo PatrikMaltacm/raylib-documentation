@@ -32,6 +32,13 @@ Como o site é puramente front-end estático sem dependências e o motor de busc
 
 Basta abrir `public/index.html` em qualquer navegador!
 
+Demonstração:
+
+
+https://github.com/user-attachments/assets/466454d1-b283-45ca-83e6-2c36599de4db
+
+
+
 ## 📜 Créditos e Direitos Autorais
 
 Todos os direitos e créditos são para:
