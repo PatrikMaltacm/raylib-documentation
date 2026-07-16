@@ -33,9 +33,8 @@ Como o site é puramente front-end estático sem dependências e o motor de busc
 Basta abrir `public/index.html` em qualquer navegador!
 
 Demonstração:
+<img width="800" height="477" alt="pongts-ezgif com-video-to-gif-converter" src="https://github.com/user-attachments/assets/6a8221bb-7980-4823-bf19-c43ca45779b0" />
 
-
-https://github.com/user-attachments/assets/466454d1-b283-45ca-83e6-2c36599de4db
 
 
 
